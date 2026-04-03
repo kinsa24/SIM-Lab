@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opname Barang - Data Penjualan</title>
+    <title>Opname Barang - Sistem Informasi Manajemen Laboratorium</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {

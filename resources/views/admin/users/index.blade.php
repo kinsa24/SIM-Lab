@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola User - Data Penjualan</title>
+    <title>Kelola User - Sistem Informasi Manajemen Laboratorium</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; }
@@ -75,7 +75,7 @@
 <body>
 
 <nav class="navbar">
-    <h1>Data Penjualan</h1>
+    <h1>Sistem Informasi Manajemen Laboratorium</h1>
     <div style="display:flex;align-items:center;gap:16px;">
         @if(Auth::user()->foto)
             <img src="{{ asset('storage/foto/' . Auth::user()->foto) }}" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.4);flex-shrink:0;" alt="Foto">
