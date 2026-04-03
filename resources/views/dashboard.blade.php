@@ -404,7 +404,7 @@
         <button class="hamburger" onclick="toggleSidebar()" title="Toggle menu">
             <span></span><span></span><span></span>
         </button>
-        <h1>Sistem Inventaris</h1>
+        <h1>SIM Lab</h1>
     </div>
     <div class="topbar-right">
         <div class="topbar-user">
