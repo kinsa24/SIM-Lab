@@ -70,7 +70,6 @@ Buka di browser: `http://localhost:8000`
 
 ---
 
-## Screenshots
 
 ## Lisensi
 
