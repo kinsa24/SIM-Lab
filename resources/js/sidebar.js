@@ -1,15 +1,70 @@
-let sidebarOpen = true;
+const MOBILE_BREAKPOINT = 768;
+let sidebarOpen = window.innerWidth > MOBILE_BREAKPOINT;
+
+function applySidebarState() {
+    const sidebar = document.getElementById('sidebar');
+    const main    = document.getElementById('main');
+    if (!sidebar || !main) return;
+    if (sidebarOpen) {
+        sidebar.classList.remove('collapsed');
+        main.classList.remove('expanded');
+    } else {
+        sidebar.classList.add('collapsed');
+        main.classList.add('expanded');
+    }
+}
+
+// Tutup sidebar otomatis saat mobile
+window.addEventListener('resize', function () {
+    const wasMobile = !sidebarOpen && window.innerWidth > MOBILE_BREAKPOINT;
+    if (window.innerWidth <= MOBILE_BREAKPOINT) {
+        sidebarOpen = false;
+    } else if (wasMobile) {
+        sidebarOpen = true;
+    }
+    applySidebarState();
+});
 
 window.toggleSidebar = function () {
-    document.getElementById('sidebar').classList.toggle('collapsed', sidebarOpen);
-    document.getElementById('main').classList.toggle('expanded', sidebarOpen);
     sidebarOpen = !sidebarOpen;
+    applySidebarState();
+
+    // Tutup sidebar mobile saat klik backdrop
+    const overlay = document.getElementById('sidebarOverlay');
+    if (overlay) overlay.style.display = sidebarOpen && window.innerWidth <= MOBILE_BREAKPOINT ? 'block' : 'none';
 };
 
 window.toggleGroup = function () {
     document.getElementById('masterHeader').classList.toggle('open');
     document.getElementById('masterMenu').classList.toggle('open');
 };
+
+// Inject responsive CSS global
+document.addEventListener('DOMContentLoaded', function () {
+    // Set state awal
+    applySidebarState();
+
+    // Inject overlay untuk mobile
+    const overlay = document.createElement('div');
+    overlay.id = 'sidebarOverlay';
+    overlay.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:89;';
+    overlay.addEventListener('click', function () {
+        sidebarOpen = false;
+        applySidebarState();
+        overlay.style.display = 'none';
+    });
+    document.body.appendChild(overlay);
+
+    // Inject CSS responsive
+    const style = document.createElement('style');
+    style.textContent = `
+        @media (max-width: 768px) {
+            .main { margin-left: 0 !important; }
+            .sidebar { z-index: 95; }
+        }
+    `;
+    document.head.appendChild(style);
+});
 
 // ── LOGOUT MODAL ──────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
