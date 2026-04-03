@@ -21,7 +21,7 @@ SIM Lab adalah aplikasi manajemen inventaris yang saya buat untuk memudahkan pen
 | Frontend | Blade Templating, CSS murni |
 | Build Tool | Vite |
 | Database | MySQL (XAMPP) |
-| Storage | Laravel Storage (foto profil) |
+| Storage | Laravel Storage |
 | Auth | Laravel Auth Middleware |
 
 ---
