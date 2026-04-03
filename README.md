@@ -12,18 +12,6 @@ SIM Lab adalah aplikasi manajemen inventaris yang saya buat untuk memudahkan pen
 
 ---
 
-## Fitur
-
-- **Login & Autentikasi** — sistem login aman dengan role Admin dan User
-- **Dashboard** — ringkasan stok barang, stok kritis, stok habis (Admin juga melihat total user)
-- **Data Barang** — daftar barang lengkap dengan status stok (Aman / Menipis / Habis), pencarian, dan filter
-- **Input Barang** *(Admin)* — tambah barang baru ke sistem
-- **Edit & Hapus Barang** *(Admin)* — kelola data barang yang sudah ada
-- **Opname Barang** *(Admin)* — rekonsiliasi stok fisik vs stok sistem, dilengkapi riwayat opname
-- **Kelola User** *(Admin)* — tambah dan hapus akun pengguna
-- **Kelola Profil** — ubah nama, email, password, dan foto profil
-
----
 
 ## Teknologi yang Digunakan
 
@@ -67,19 +55,23 @@ npm run dev
 Buka di browser: `http://localhost:8000`
 
 ---
+## Fitur
 
-## Struktur Utama
+- **Admin**:
+  - Menambahkan, mengedit, dan menghapus pengguna.
+  - Menambahkan, mengedit, dan menghapus barang.
+  - Melihat laporan stok barang.
 
-```
-app/Http/Controllers/   — LoginController, BarangController, OpnameController, dll
-app/Models/             — User, Barang, Opname
-resources/views/        — Semua halaman Blade (dashboard, barang, profil, opname, dll)
-resources/js/           — sidebar.js (global), login.js
-database/migrations/    — Skema tabel users, barangs, opnames
-```
+- **User**:
+  - Melihat daftar barang.
+  - Meminjam barang.
+  - Mengembalikan barang.
+  - Melihat riwayat peminjaman.
 
 ---
 
+## Screenshots
+
 ## Lisensi
 
-Proyek ini dibuat untuk keperluan pembelajaran dan pengembangan sistem informasi laboratorium.
+Proyek ini dibuat untuk keperluan tugas akhir yaitu pengembangan sistem informasi laboratorium.
