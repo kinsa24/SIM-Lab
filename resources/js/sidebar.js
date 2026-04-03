@@ -16,11 +16,13 @@ function applySidebarState() {
 
 // Tutup sidebar otomatis saat mobile
 window.addEventListener('resize', function () {
-    const wasMobile = !sidebarOpen && window.innerWidth > MOBILE_BREAKPOINT;
     if (window.innerWidth <= MOBILE_BREAKPOINT) {
         sidebarOpen = false;
-    } else if (wasMobile) {
+    } else {
         sidebarOpen = true;
+        // Sembunyikan overlay saat kembali ke desktop
+        const overlay = document.getElementById('sidebarOverlay');
+        if (overlay) overlay.style.display = 'none';
     }
     applySidebarState();
 });
@@ -29,9 +31,11 @@ window.toggleSidebar = function () {
     sidebarOpen = !sidebarOpen;
     applySidebarState();
 
-    // Tutup sidebar mobile saat klik backdrop
+    // Overlay hanya di mobile
     const overlay = document.getElementById('sidebarOverlay');
-    if (overlay) overlay.style.display = sidebarOpen && window.innerWidth <= MOBILE_BREAKPOINT ? 'block' : 'none';
+    if (overlay) {
+        overlay.style.display = (sidebarOpen && window.innerWidth <= MOBILE_BREAKPOINT) ? 'block' : 'none';
+    }
 };
 
 window.toggleGroup = function () {
