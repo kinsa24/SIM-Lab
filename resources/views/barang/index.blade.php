@@ -78,6 +78,11 @@
             transition: margin-left 0.25s ease;
         }
         .main.expanded { margin-left: 0; }
+        @media (max-width: 768px) {
+            .main { margin-left: 0 !important; }
+            .sidebar { transform: translateX(calc(-1 * var(--sidebar-width))); z-index: 95; }
+            .sidebar.mobile-open { transform: translateX(0); }
+        }
 
         /* PAGE HEADER */
         .page-header {
@@ -179,10 +184,6 @@
         .empty-state svg { margin-bottom: 12px; opacity: 0.4; }
         .empty-state p { font-size: 14px; }
 
-        @media (max-width: 768px) {
-            .sidebar { transform: translateX(calc(-1 * var(--sidebar-width))); }
-            .main { margin-left: 0; }
-        }
     </style>
 </head>
 <body>

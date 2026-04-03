@@ -47,6 +47,11 @@
         .sub-item::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #cbd5e0; flex-shrink: 0; }
         .main { margin-top: var(--topbar-height); margin-left: var(--sidebar-width); padding: 32px 28px; transition: margin-left 0.25s ease; }
         .main.expanded { margin-left: 0; }
+        @media (max-width: 768px) {
+            .main { margin-left: 0 !important; }
+            .sidebar { transform: translateX(calc(-1 * var(--sidebar-width))); z-index: 95; }
+            .sidebar.mobile-open { transform: translateX(0); }
+        }
         .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6b7280; margin-bottom: 20px; }
         .breadcrumb a { color: var(--navy); text-decoration: none; }
         .form-card { background: white; border-radius: 12px; padding: 28px 32px; max-width: 700px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #eef0f4; }

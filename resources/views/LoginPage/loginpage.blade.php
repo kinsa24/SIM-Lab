@@ -68,9 +68,9 @@
 
     </form>
 
-    <div class="login-footer">
+    {{-- <div class="login-footer">
         Belum punya akun? <a href="#">Daftar sekarang</a>
-    </div>
+    </div> --}}
 
 </div>
 

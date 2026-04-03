@@ -62,6 +62,11 @@
         /* MAIN */
         .main { margin-top: var(--topbar-height); margin-left: var(--sidebar-width); padding: 32px 28px; transition: margin-left 0.25s ease; }
         .main.expanded { margin-left: 0; }
+        @media (max-width: 768px) {
+            .main { margin-left: 0 !important; }
+            .sidebar { transform: translateX(calc(-1 * var(--sidebar-width))); z-index: 95; }
+            .sidebar.mobile-open { transform: translateX(0); }
+        }
 
         /* BREADCRUMB */
         .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6b7280; margin-bottom: 20px; }

@@ -245,6 +245,11 @@
         }
 
         .main.expanded { margin-left: 0; }
+        @media (max-width: 768px) {
+            .main { margin-left: 0 !important; padding: 20px 16px; }
+            .sidebar { transform: translateX(calc(-1 * var(--sidebar-width))); z-index: 95; }
+            .sidebar.mobile-open { transform: translateX(0); }
+        }
 
         .welcome {
             font-size: 20px;

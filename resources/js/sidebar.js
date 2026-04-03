@@ -1,73 +1,61 @@
 const MOBILE_BREAKPOINT = 768;
-let sidebarOpen = window.innerWidth > MOBILE_BREAKPOINT;
 
-function applySidebarState() {
-    const sidebar = document.getElementById('sidebar');
-    const main    = document.getElementById('main');
-    if (!sidebar || !main) return;
-    if (sidebarOpen) {
-        sidebar.classList.remove('collapsed');
-        main.classList.remove('expanded');
-    } else {
-        sidebar.classList.add('collapsed');
-        main.classList.add('expanded');
-    }
+function isMobile() {
+    return window.innerWidth <= MOBILE_BREAKPOINT;
 }
 
-// Tutup sidebar otomatis saat mobile
-window.addEventListener('resize', function () {
-    if (window.innerWidth <= MOBILE_BREAKPOINT) {
-        sidebarOpen = false;
-    } else {
-        sidebarOpen = true;
-        // Sembunyikan overlay saat kembali ke desktop
-        const overlay = document.getElementById('sidebarOverlay');
-        if (overlay) overlay.style.display = 'none';
-    }
-    applySidebarState();
-});
-
+// Desktop: toggle collapsed. Mobile: toggle mobile-open
 window.toggleSidebar = function () {
-    sidebarOpen = !sidebarOpen;
-    applySidebarState();
-
-    // Overlay hanya di mobile
+    const sidebar = document.getElementById('sidebar');
+    const main    = document.getElementById('main');
     const overlay = document.getElementById('sidebarOverlay');
-    if (overlay) {
-        overlay.style.display = (sidebarOpen && window.innerWidth <= MOBILE_BREAKPOINT) ? 'block' : 'none';
+    if (!sidebar) return;
+
+    if (isMobile()) {
+        const isOpen = sidebar.classList.toggle('mobile-open');
+        if (overlay) overlay.style.display = isOpen ? 'block' : 'none';
+    } else {
+        const isCollapsed = sidebar.classList.toggle('collapsed');
+        if (main) main.classList.toggle('expanded', isCollapsed);
     }
 };
+
+// Resize: reset state
+window.addEventListener('resize', function () {
+    const sidebar = document.getElementById('sidebar');
+    const main    = document.getElementById('main');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (!sidebar) return;
+
+    if (isMobile()) {
+        sidebar.classList.remove('collapsed');
+        sidebar.classList.remove('mobile-open');
+        if (main) main.classList.remove('expanded');
+        if (overlay) overlay.style.display = 'none';
+    } else {
+        sidebar.classList.remove('mobile-open');
+        sidebar.classList.remove('collapsed');
+        if (main) main.classList.remove('expanded');
+        if (overlay) overlay.style.display = 'none';
+    }
+});
 
 window.toggleGroup = function () {
     document.getElementById('masterHeader').classList.toggle('open');
     document.getElementById('masterMenu').classList.toggle('open');
 };
 
-// Inject responsive CSS global
+// Inject overlay untuk mobile
 document.addEventListener('DOMContentLoaded', function () {
-    // Set state awal
-    applySidebarState();
-
-    // Inject overlay untuk mobile
     const overlay = document.createElement('div');
     overlay.id = 'sidebarOverlay';
     overlay.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:89;';
     overlay.addEventListener('click', function () {
-        sidebarOpen = false;
-        applySidebarState();
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar) sidebar.classList.remove('mobile-open');
         overlay.style.display = 'none';
     });
     document.body.appendChild(overlay);
-
-    // Inject CSS responsive
-    const style = document.createElement('style');
-    style.textContent = `
-        @media (max-width: 768px) {
-            .main { margin-left: 0 !important; }
-            .sidebar { z-index: 95; }
-        }
-    `;
-    document.head.appendChild(style);
 });
 
 // ── LOGOUT MODAL ──────────────────────────────────────────
@@ -128,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Cegat semua tombol logout
     document.querySelectorAll('.btn-logout').forEach(function (btn) {
-        btn.type = 'button'; // cegah form submit langsung
+        btn.type = 'button';
         btn.addEventListener('click', function () {
             modal.classList.add('show');
         });
